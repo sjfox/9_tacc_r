@@ -1,0 +1,60 @@
+---
+title: "Simulating Stochastic Epidemics"
+author: "Spencer Fox"
+date: "11/10/2016"
+output: 
+  html_document:
+    toc: true
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+knitr::opts_knit$set(root.dir = "../")
+set.seed(808)
+```
+
+## Introduction
+This will demonstrate how you can simulate stochastic epidemics using the R package `EpiModel`. If you're interested in learning more, their [website](http://www.epimodel.org/tut.html) has a ton more information!
+```{r }
+# install.packages("EpiModel")
+library(EpiModel)
+```
+
+## Simulating an SIR Model
+### Setting up the simulation 
+First we can setup the type of epidemic simulation we want using the `control.icm` function. Here we will define that we will be simulating an SIR model, with 10 stochastic simulations, and each simulation will be run for 300 steps (days).
+
+```{r}
+control <- control.icm(type = "SIR", nsims = 10, nsteps = 300)
+```
+
+### Setting up the population
+The SIR model is a specific type of epidemic simulation that assumes that a population is composed of individuals in three distinct classes: Susceptible, Infectious, and Recovered (hence the name). First let's initialize our population (set out how many individuals begin in each class). The `EpiModel` package contains a function, `init.icm()` for this task. Let's have a population of 1000 individuals, and start out with 5 people initially infected.
+```{r}
+init <- init.icm(s.num = 9995, i.num = 5, r.num=0)
+```
+
+### Setting up the disease parameters
+There are two main features defining the disease: (1) the infectiousness and (2) the recovery time for an individual. So we need to define the probability an infectious individual infects someone in the population, and the rate at which individuals recover (1 / the recovery rate = the infectious duration). After defining these parameters, we can use the `param.icm` function to setup the disease parameters.
+```{r}
+inf_prob <- 0.15
+rec_rate <- 1 / 10
+
+param <- param.icm(inf.prob = inf_prob, rec.rate = rec_rate)
+```
+
+### Running the model
+Once you've setup the population, simulation, and disease parameters, you can use the `icm` function to run your models, and the `plot` function can be used to see what the simulations look like.
+```{r, cache=TRUE}
+mod <- icm(param, init, control)
+plot(mod, sim.lines = T)
+```
+
+### Saving the results
+```{r}
+save(list = c("mod"), 
+          file = paste0("data/simulated_epidemics/", "epi_", inf_prob, "_", rec_rate, ".Rdata"))
+
+```
+
