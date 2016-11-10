@@ -11,7 +11,7 @@ rec_rates <- c(1/100, 1/10, 1)
 sink('../launcher/run_sim_epis.txt')
 for(inf_prob in inf_probs){
   for(rec_rate in rec_rates){
-    startCmd <- "R CMD BATCH --no-restore --no-save '--args"
+    startCmd <- "R CMD BATCH '--args"
     paramCmd <- paste0(' inf_prob=', inf_prob, ' rec_rate=', rec_rate, " '")
     endCmd <- " ../code/sim_epidemics.R"
     full_cmd <- paste0(startCmd, paramCmd, endCmd)
