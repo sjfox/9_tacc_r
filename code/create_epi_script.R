@@ -1,8 +1,13 @@
 rm(list=ls())
-if(grepl('spencerfox', Sys.info()['login'])) setwd('~/projects/workshops/rstats_fall2016/files/9_tacc_r/code/')
-if(grepl('sjf826', Sys.info()['login'])) setwd('/home1/02958/sjf826/9_tacc_r/code/')
-if(grepl('tacc', Sys.info()['nodename'])) setwd('/home1/02958/sjf826/9_tacc_r/code/')
-
+if(grepl('spencerfox', Sys.info()['login'])) {
+  setwd('~/projects/workshops/rstats_fall2016/files/9_tacc_r/code/')
+}
+if(grepl('sjf826', Sys.info()['login'])) {
+  setwd('/home1/02958/sjf826/9_tacc_r/code/')
+}
+if(grepl('eac3496', Sys.info()['login'])) {
+  setwd('/home1/03123/eac3496/9_tacc_r/code/')
+}
 
 ## First give list of parameter values you want to explore
 inf_probs <- seq(0, 0.5, length.out = 10)

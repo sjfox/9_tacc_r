@@ -11,13 +11,9 @@ if(grepl('sjf826', Sys.info()['login'])) {
   setwd('/home1/02958/sjf826/9_tacc_r/code/')
   savepath <- "../../workfolder/data/simulated_epidemics/"
 }
-if(grepl('tacc', Sys.info()['nodename'])){
-  setwd('/home1/02958/sjf826/9_tacc_r/code/')
-  savepath <- "../../workfolder/data/simulated_epidemics/"
-} 
 if(grepl('eac3496', Sys.info()['login'])) {
   setwd('/home1/03123/eac3496/9_tacc_r/code/')
-  savepath <- "../../workfolder/data/simulated_epidemics/"
+  savepath <- "../../workfolder/epi_data/simulated_epidemics/"
 }
 
 ## Need to call model with following parameters:
@@ -38,7 +34,7 @@ if(length(args)>0)  { ## Then cycle through each element of the list and evaluat
 ## This part same as normal simulation
 library(EpiModel)
 
-control <- control.icm(type = "SIR", nsims = 1000, nsteps = 300)
+control <- control.icm(type = "SIR", nsims = 10, nsteps = 300)
 init <- init.icm(s.num = 9995, i.num = 5, r.num=0)
 
 ## This is where our command argument parameters come in play.
