@@ -12,12 +12,12 @@
 #-------------------------------------------------------
 # 
 #------------------Scheduler Options--------------------
-#SBATCH -J run_zika_county          # Job name
-#SBATCH -N 34                    # Total number of nodes (16 cores/node)
-#SBATCH -n 540                  # Total number of tasks
+#SBATCH -J epi_sims         # Job name
+#SBATCH -N 2                    # Total number of nodes (16 cores/node)
+#SBATCH -n 30                  # Total number of tasks
 #SBATCH -p normal          # Queue name
-#SBATCH -o out_branches.o%j      # Name of stdout output file (%j expands to jobid)
-#SBATCH -t 24:00:00            # Run time (hh:mm:ss)
+#SBATCH -o out_sims.o%j      # Name of stdout output file (%j expands to jobid)
+#SBATCH -t 00:30:00            # Run time (hh:mm:ss)
 #SBATCH --mail-user=spncrfx@gmail.com
 #SBATCH --mail-type=all  # email me all messages
 #      <------------ Account String ------------>
@@ -39,7 +39,7 @@ module load launcher/2.0
 export TACC_LAUNCHER_PPN=16
 export EXECUTABLE=$TACC_LAUNCHER_DIR/init_launcher
 export WORKDIR=.
-export CONTROL_FILE=run_county.txt
+export CONTROL_FILE=run_sim_epis.txt
 
 # Variable descriptions:
 #
