@@ -24,9 +24,12 @@ library(EpiModel)
 
 param <- param.icm(inf.prob = inf_prob, rec.rate = rec_rate)
 init <- init.icm(s.num = 1000, i.num = 5, r.num=0)
-control <- control.icm(type = "SIR", nsims = 1000, nsteps = 300)
+control <- control.icm(type = "SIR", nsims = 10, nsteps = 300)
 mod <- icm(param, init, control)
 
+if(grepl('spencerfox', Sys.info()['login'])) savepath <- "../data/simulated_epidemics/"
+if(grepl('sjf826', Sys.info()['login'])) savepath <- "../../workfolder/data/simulated_epidemics/"
+if(grepl('tacc', Sys.info()['nodename'])) savepath <- "../../workfolder/data/simulated_epidemics/"
 
 save(list = c("mod"), 
-          file = paste0("../../workfolder/data/simulated_epidemics/", "epi_", inf_prob, "_", rec_rate, "_", nsims, ".Rdata"))
+          file = paste0(savepath, "epi_", inf_prob, "_", rec_rate, ".Rdata"))
