@@ -13,8 +13,9 @@ if(grepl('sjf826', Sys.info()['login'])) {
 }
 if(grepl('eac3496', Sys.info()['login'])) {
   setwd('/home1/03123/eac3496/9_tacc_r/code/')
-  savepath <- "../../workfolder/epi_data/simulated_epidemics/"
+  savepath <- "../../workfolder/epi_data/"
 }
+
 
 ## Need to call model with following parameters:
 # inf_prob, rec_rate
